@@ -56,7 +56,7 @@ app.post("/", function(req, res){
         lastName: lastName,
         email: email
         };
-
+    console.log(subscribingUser.firstName)
     async function addContact() {
       const response = await mailchimp.lists.addListMember(listID, {
         email_address: subscribingUser.email,
@@ -75,6 +75,6 @@ app.post("/", function(req, res){
 
 
 //assign a port to run our webapp on
-app.listen(3000, function(){
+app.listen(5000, function(){
     console.log("I'm listening on port 3000...")
 })
