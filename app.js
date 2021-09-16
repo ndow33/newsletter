@@ -8,15 +8,15 @@ const https = require("https");
 const mailchimp = require("@mailchimp/mailchimp_marketing");
 
 const app = express();
-const apiKey = "f1e7f2f723d86103ebd2ff702f6425db-us5"
-const server = "us5"
-const listID = "f416e00f55"
 
+//import credentials from secrets.js
+const {Secrets} = require('./secrets.js');
+const listID = Secrets.listID;
 
 //Mailchimp setup
 mailchimp.setConfig({
-  apiKey: apiKey,
-  server: "us5",
+  apiKey: Secrets.apiKey,
+  server: Secrets.server,
 });
 
 //Check mailchimp api connection health
@@ -49,8 +49,9 @@ app.post("/", function(req, res){
     const email = req.body.email;
     console.log(firstName, lastName, email)
 
+    
+    
     //Create a json object with the subscriber's data
-    const listId = listID;
     const subscribingUser = {
         firstName: firstName,
         lastName: lastName,
