@@ -57,11 +57,13 @@ app.post("/", function(req, res){
         email: email
         };
     console.log(subscribingUser.firstName)
+
+    
     async function addContact() {
       const response = await mailchimp.lists.addListMember(listID, {
         email_address: subscribingUser.email,
         status: "subscribed",
-        merg_fields: {
+        merge_fields: {
           FNAME: subscribingUser.firstName,
           LNAME: subscribingUser.lastName
         }
@@ -73,8 +75,11 @@ app.post("/", function(req, res){
     res.sendFile(__dirname + "/success.html");
 });
 
-
+/*
 //assign a port to run our webapp on
 app.listen(5000, function(){
     console.log("I'm listening on port 3000...")
 })
+*/
+//This is needed for Heroku to dynamically assign a port when it is deployed.
+app.listen(process.env.PORT || 5000);
